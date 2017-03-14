@@ -6,10 +6,19 @@ python:
   - 3.6
   - 3.5
   - 3.4
+  - 3.3
+  - 3.2
   - 2.7
+  - 2.6
+
+# configure environment variables for Python version
+before_install:
+  - USE_PIP_VERSION=latest
+  - if [[ $TRAVIS_PYTHON_VERSION = 3.2 ]]; then USE_PIP_VERSION=7.1.2; fi
 
 install:
-  - pip install --disable-pip-version-check --upgrade pip
+  - if [[ $USE_PIP_VERSION != latest ]]; then pip install --ignore-installed --disable-pip-version-check pip==$USE_PIP_VERSION; fi
+  - if [[ $USE_PIP_VERSION = latest ]]; then pip install --disable-pip-version-check --upgrade pip; fi
   - pip install -r requirements.txt
 
 before_script:

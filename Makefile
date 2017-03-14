@@ -31,7 +31,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 test :
-	python setup.py test
+	python ./setup.py test
 	$(MAKE) -C test test
 
 upload : test
